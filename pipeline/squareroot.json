@@ -1,0 +1,79 @@
+{
+	"name": "squareroot",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set_value_a",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "a",
+					"value": 2
+				}
+			},
+			{
+				"name": "Set_value_b",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "b",
+					"value": 5
+				}
+			},
+			{
+				"name": "square_output",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set_value_a",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set_value_b",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "output",
+					"value": {
+						"value": "@mul(add(variables('a'),variables('b') ),add(variables('a'),variables('b') ) )",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"a": {
+				"type": "Integer"
+			},
+			"b": {
+				"type": "Integer"
+			},
+			"output": {
+				"type": "Integer"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-04-08T16:41:18Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

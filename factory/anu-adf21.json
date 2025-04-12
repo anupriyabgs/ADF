@@ -1,0 +1,9 @@
+{
+	"name": "anu-adf21",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "24ae63c7-8f21-415a-9b04-815126a4cff6",
+		"tenantId": "4224c72d-7160-4182-a8ab-745fc1672a93"
+	}
+}

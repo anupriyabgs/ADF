@@ -1,0 +1,79 @@
+{
+	"name": "Area_calculation",
+	"properties": {
+		"activities": [
+			{
+				"name": "dec_length",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "length",
+					"value": 5
+				}
+			},
+			{
+				"name": "dec_breadth",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "breadth",
+					"value": 1
+				}
+			},
+			{
+				"name": "cal_Area",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "dec_length",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "dec_breadth",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Area",
+					"value": {
+						"value": "@mul(variables('length'),variables('breadth'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"length": {
+				"type": "Integer"
+			},
+			"breadth": {
+				"type": "Integer"
+			},
+			"Area": {
+				"type": "Integer"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-04-08T03:19:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

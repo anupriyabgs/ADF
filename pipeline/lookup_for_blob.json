@@ -1,0 +1,70 @@
+{
+	"name": "lookup_for_blob",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookupdemo",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "ds_blob_input",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Set_lookup_output",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookupdemo",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "temp",
+					"value": {
+						"value": "@activity('Lookupdemo').output.value",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"temp": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-04-10T03:13:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

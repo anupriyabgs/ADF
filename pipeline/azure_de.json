@@ -1,0 +1,102 @@
+{
+	"name": "azure_de",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set _a",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "a",
+					"value": "AZURE"
+				}
+			},
+			{
+				"name": "Set_d",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "d",
+					"value": "DATA"
+				}
+			},
+			{
+				"name": "Set_e",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "e",
+					"value": "ENGINEER"
+				}
+			},
+			{
+				"name": "Set_output",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set_d",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set _a",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set_e",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "output",
+					"value": {
+						"value": "@concat(variables('a'),' ' ,variables('d'),' ' ,variables('e'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"a": {
+				"type": "String"
+			},
+			"d": {
+				"type": "String"
+			},
+			"e": {
+				"type": "String"
+			},
+			"output": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-04-08T05:35:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
